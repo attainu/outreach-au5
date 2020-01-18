@@ -60,7 +60,7 @@ router.get("/:id", function(req, res){
     });
 });
 
-router.get("/:id/edit", middleware.checkUserevent, function(req, res){
+router.get("/:id/edit", middleware.checkUserEvent, function(req, res){
     //find the event with provided ID
     Event.findById(req.params.id, function(err, foundEvent){
         if(err){
