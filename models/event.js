@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var eventSchema = new mongoose.Schema({
+var EventSchema = new mongoose.Schema({
    name: String,
    image: String,
    description: String,
