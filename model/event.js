@@ -19,4 +19,4 @@ var eventSchema = new mongoose.Schema({
    ]
 });
 
-module.exports = mongoose.model("Event", campgroundSchema);
+module.exports = mongoose.model("Event", EventSchema);
