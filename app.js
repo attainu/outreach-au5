@@ -10,7 +10,7 @@ var express     = require("express"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
     session = require("express-session"),
-    seedDB      = require("./seeds"),
+    // seedDB      = require("./seeds"),
     methodOverride = require("method-override");
     
 //requiring routes
