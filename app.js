@@ -11,7 +11,8 @@ var express     = require("express"),
     User        = require("./models/user"),
     session = require("express-session"),
     // seedDB      = require("./seeds"),
-    methodOverride = require("method-override");
+    methodOverride = require("method-override"),
+    userRoute = require("./routes/user");;
     
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
@@ -24,6 +25,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(cookieParser('secret'));
+app.use(express.static('public'))
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -50,6 +52,12 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/event", eventRoutes);
 app.use("/events/:id/comments", commentRoutes);
+
+
+app.get("/homepage_n",function(req,res){
+    res.sendFile(path.join(__dirname+"/homepage_guest.html"));
+})
+
 
 app.listen(3000, function(){
    console.log("The Server Has Started!");
