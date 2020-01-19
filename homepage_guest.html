@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homepage-Guest</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/nav_guest_style.css">
+    <link rel="stylesheet" type="text/css" href="/css/homepage_guest.css">
+
+</head>
+<body>
+    <div id="navigation-bar"></div> 
+
+    <div class="content-container">
+        <div class="content-div">
+            <div class="guest-list">
+                <div class="guest-homepage-quote">
+                    <p>Explore.</p>
+                    <p> Find your thing.</p>
+                </div>
+
+                <div class="selection">
+                    <ul class="select-list">
+                        <li class="active">Events</li>
+                        <li>Tasks</li>
+                    </ul>
+                </div>
+                <div class="search_and_results">
+                    <div class="guest_search">
+                        <div class="guest-search">
+                            <div class="guest-search-border">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="guest-search-icon" width="21" height="21" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"/></svg>
+                                <input class="guest-search-field" type="text" placeholder="Search"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="guest-infographics">
+                INFO-GRAPHICS
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    $(document).ready(function(){
+        $("#navigation-bar").load("/navigation_bar/nav_guest/nav_guest.html");
+    
+        $(".guest-search-field").focus(()=>{
+            $(".guest-search-border").addClass("search-parent-focus");
+        }).blur(()=>{
+            $(".guest-search-border").removeClass("search-parent-focus");
+        })
+
+    }); 
+</script>
+</html>
