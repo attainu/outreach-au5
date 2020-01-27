@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homepage</title>
+
+    <script src="https://kit.fontawesome.com/7f85a03441.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" type="text/css" href="/css/nav_home.css">
+    <link rel="stylesheet" type="text/css" href="/css/show.css">
+</head>
+
+<body>
+    <div id="navigation-bar"></div>
+
+    </div>
+    <h1>{{error}}</h1>
+    <div class="main-div">
+        <div class="sub-main-div">
+            <div class="post-div">
+                <div class="blog-header">
+
+                    <div class="card mb-3" style="100%">
+                        <div class="row no-gutters">
+                            <div class="col-md-4 event-image">
+                                <img src="{{event.image}}">
+
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="cardc-heading">
+                                        <h5 class="card-title">{{event.name}}</h5>
+                                        {{#if state}}
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                                                aria-haspopup="true"><i class="fas fa-ellipsis-h"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right"
+                                                aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" data-toggle="modal"
+                                                    data-target="#myModal">Edit</a>
+                                                <a class="dropdown-item" data-toggle="modal"
+                                                    data-target="#confirm-delete">Delete</a>
+                                            </div>
+                                        </div>
+                                        {{/if}}
+                                    </div>
+                                    <p class="card-text"><small class="text-muted"></small><i
+                                                class="fas fa-map-marker-alt"></i>&nbsp;{{event.city}}</p>
+                                    <hr>
+                                    <p class="card-text event-description">{{event.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-content"> <!-- Images and name div is event-header -->
+                <div class="sub-event-content">
+                    <div class="comment-section">
+                        <div class="comment-box">
+                            <form action="/events/{{event._id}}/comments" method="POST" id="commentform">
+                                <div class="comment-message">
+                                    <textarea  name="comment[text]" placeholder="Write your comment here..." id="comment"></textarea>
+                                </div>
+                                <hr>
+                                <div class="comment-post">
+                                    <button class="btn btn-primary">Comment</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="comments">
+                            {{#each i}}
+                            <div class="author-details">
+                                <div class="author-photo">
+                                    <img src={{this.imageFile}} alt=""></div>
+                                    <div class="comment-each">
+                                            <p class="comment-author">{{this.name}}</p>
+                                            <p class="comment-body" >{{this.text}}</p>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Event</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="/event/{{event._id}}?_method=PUT" method="POST">
+                        <input type="text" class="form-control" name="eventname" id="eventname" value="{{event.name}}"
+                            placeholder="Event Name">
+                        <input type="text" class="form-control" name="city" id="city" placeholder="City"
+                            value="{{event.city}}">
+                        <textarea class="form-control" name="description" id="description" rows='5'
+                            placeholder="Description">{{event.description}}</textarea>
+                        <input type="text" class="form-control" name="imageFile" id="image" placeholder="Image"
+                            value="{{event.image}}">
+                        <button class="btn btn-outline-dark">Submit</button>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Delete
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <form action="/event/{{event._id}}?_method=DELETE" method="POST">
+                        <button class="btn btn-danger btn-ok">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    $(document).ready(function () {
+        $("#navigation-bar").load("/navigation_bar/nav/nav.hbs");
+
+        $(".guest-search-field").focus(() => {
+            $(".guest-search-border").addClass("search-parent-focus");
+        }).blur(() => {
+            $(".guest-search-border").removeClass("search-parent-focus");
+        })
+
+        $("#changeHeart").click(() => {
+            $("#changeHeart").toggleClass("fas").toggleClass("far")
+        })
+
+    });
+</script>
+
+</html>

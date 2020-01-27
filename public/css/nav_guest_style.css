@@ -1,0 +1,128 @@
+
+div.navc{
+    display: flex;
+    max-width: 100%;
+    max-height: 56px;
+    height: 56px;
+    background: transparent ;
+}
+
+div.navc-main{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    justify-content: space-between;
+}
+
+@media screen and ( min-width:1120px){
+        div.navc-main{
+            width:1120px;
+        }
+}
+
+nav.navbar{
+    height: 100%;
+}
+
+.navc-content{
+    display: flex;
+    flex:0 0 auto;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+div.navc-header{
+    display: flex;
+    flex:1 1 auto;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+div.navc-logo img{
+    max-height: 36px;
+}
+
+div.navc-logo{
+    display: flex;
+    float: left;
+    margin-left: 5px;
+}
+
+div.navc-search{
+    display: flex;
+    width: 100%;
+    height: 36px;
+    margin: 0 9px 0 9px;
+}
+
+div.navc-search-border{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1.5px solid rgba(143, 143, 143,0.4);
+    padding: 5px;
+    border-radius: 3px;
+    max-width: 440px;
+}
+
+div.navc-search-bar{
+    max-width: 450px;
+}
+
+svg.navc-search-icon{
+    fill:rgba(120, 120, 120,1);
+}
+
+input.navc-search-field{
+    width: 100%;
+    border: none;
+    font-size: 14px;
+    padding-left: 3px;
+    font-weight: 500;
+}
+
+input.navc-search-field:focus{
+    outline: none;
+}
+
+a.navc-btn{
+    height: 44px;
+}
+
+
+a.navc-btn-login{
+    border:none;
+    margin-right: 15px;
+    font-size: 15px;
+    background-color: rgba(19, 85, 171,0.9);
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+a.navc-btn-create-account{
+    border:none;
+    background-color: rgb(19, 85, 171,0.9);
+    color: white;
+    font-size: 14px;
+    margin-right: 5px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+
+.navc-btn-login:hover{
+    color: rgb(19, 85, 171,0.9);
+    background-color: white;
+    opacity: 1;
+}
+
+.navc-btn-create-account:hover{
+    color: rgb(19, 85, 171,0.9);
+    background-color: white;
+    opacity: 1;
+}

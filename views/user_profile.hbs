@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>User Profile</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Civic - CV Resume">
+	<meta name="keywords" content="resume, civic, onepage, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->   
+	<link href="img/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	{{!-- <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet"> --}}
+   <script src="https://kit.fontawesome.com/7f85a03441.js" crossorigin="anonymous"></script>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="/css/flaticon.css"/>
+	<link rel="stylesheet" href="/css/owl.carousel.css"/>
+	<link rel="stylesheet" href="/css/magnific-popup.css"/>
+	<link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/nav_home.css">
+
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+    <div id="navigation-bar"></div>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+	
+	<!-- Header section start -->
+	
+	<!-- Header section end -->
+
+	<!-- Hero section start -->
+	<section class="hero-section spad">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="hero-text">
+								<h2 style="font-size: 118px;">{{details.name}}</h2>
+								<p style="border-left: 5px solid; padding-left:10px">{{details.about}}</p>
+							</div>
+							<div class="hero-info">
+								<div>
+									<h2>General Info</h2>
+								</div>
+								<ul>
+                                    <li><span>E-mail</span>{{details.username}}</li>
+                                    <li><span>Phone </span>{{details.phone}}</li>
+									<li><span>Gender</span>{{details.gender}}</li>
+									<li><span>City</span>{{details.city}}</li>	
+									<li><span><a href="#" data-toggle="modal" data-target="#myModal1">Edit Password<a></span>
+									<a href="" data-toggle="modal" data-target="#myModal">Edit Profile</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<figure class="hero-image">
+								<img src={{details.imageFile}} alt="5">
+							</figure>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+	<!-- Social links section start -->
+	<div class="social-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="social-link-warp">
+						<div class="social-links">
+							<a href=""><i class="fab fa-linkedin"></i></a>
+							<a href=""><i class="fab fa-instagram"></i></a>
+							<a href=""><i class="fab fa-facebook"></i></a>
+							<a href=""><i class="fab fa-twitter"></i></a>
+						</div>
+						<h2 class="hidden-md hidden-sm">My Social Profiles</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Profile</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="/user/updateprofile/{{details._id}}/?_method=PUT" method="POST">
+                    <div class="col-md-9">
+                        <textarea type="text" class="form-control" name="name" id="Name" placeholder="Full Name" rows="1">{{details.name}}</textarea>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" value={{details.phone}}>
+                    </div>
+                    <div class="col-md-9">
+                        <select type="text" id="selection" class="form-control formCity" name="city">
+                        <option selected="true" disabled>{{details.city}}</option>
+						<option value="Delhi" selected="selected">Delhi</option>
+                        {{#each data}}
+                            <option value={{this}}>{{this}}</option>
+                        {{/each}}
+                            
+                        </select>
+                    </div>
+                    <div class="col-md-9">
+                        <select name="gender"  id="selection" class="form-control formGender">
+                            <option value={{details.gender}} selected="true" disabled>Gender</option>
+                            <option value="Male" selected="selected">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+					
+                    <div class="col-md-9">
+                        <textarea type="text" class="form-control" name="about" id="about" placeholder="about">{{details.about}}</textarea>
+                    </div>
+                    
+                    <div class="row text-center mt-4">
+                        <div class="col">
+                            <button type="Submit" class="btn buuup btn-info">Update</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Password</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="/user/changePassword/{{details._id}}/?_method=PUT" method="POST">
+                    <div class="col-md-9">
+                        <input type="password" name="oldpassword" placeholder="Old Password" class="form-control">
+                    </div>
+                    <div class="col-md-9">
+                        <input type="password" name="newpassword" placeholder="New Password" class="form-control">
+					</div>
+                    
+                    <div class="row text-center mt-4">
+                        <div class="col">
+                            <button type="Submit" class="btn buuup btn-info">Update</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script src="script/jquery-2.1.4.min.js"></script>
+	<script src="script/bootstrap.min.js"></script>
+	<script src="script/owl.carousel.min.js"></script>
+	<script src="script/magnific-popup.min.js"></script>
+	<script src="script/circle-progress.min.js"></script>
+	<script src="script/main.js"></script>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#navigation-bar").load("/navigation_bar/nav/nav.hbs");
+
+        $(".guest-search-field").focus(() => {
+            $(".guest-search-border").addClass("search-parent-focus");
+        }).blur(() => {
+            $(".guest-search-border").removeClass("search-parent-focus");
+        })
+        $("#myCarousel").carousel({
+            interval: 8000,
+            pause: false
+        });
+    });
+
+</script>
+</html>

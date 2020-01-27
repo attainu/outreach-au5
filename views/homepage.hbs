@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homepage</title>
+
+    <script src="https://kit.fontawesome.com/7f85a03441.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+    <link rel="stylesheet" type="text/css" href="/css/nav_home.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+</head>
+
+<body>
+    <div id="navigation-bar"></div>
+
+    </div>
+    <div class="main-div">
+
+        <div class="sub-main-div">
+            <div class="side-bar">
+                <div class="cover-photo">
+                    <div class="profile-photo" data-toggle="modal" data-target="#myModalPP"><img
+                            src="{{user.imageFile}}" alt="Profile Photo" class="photo-hover">
+                        <div class="middle">
+                            <div class="text"> <i class="fas fa-camera"></i> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-header">
+                    {{user.name}}
+                </div>
+                <div class="sidebar-location">
+                    {{user.city}}
+                </div>
+                <div class="sidebar-link">
+                    <a href="/user">View Profile</a>
+                </div>
+                <hr>
+            </div>
+            <div class="event-post-div">
+
+                <div class="create-post" data-toggle="modal" data-target="#myModal">
+                    <i class="fas fa-pen"></i>&nbsp;
+                    <span><u>Create Event or Task</u></span>
+                </div>
+                <div class="selection">
+                    <ul class="select-list">
+                        <li class="active" id="showEvents">Events</li>
+                        <li id="showTasks">Tasks</li>
+                    </ul>
+                </div>
+                <div id="gumgumEvent">
+                    {{#each event}}
+                    <div class="event-div">
+                        <div class="event-outer">
+
+                            <div class="author-details">
+                                <div class="author-photo"><img src={{this.author.image}} alt=""></div>
+                                {{this.author.name}}
+                            </div>
+                            <div class="event-content">
+                                <div class="event-image"><img src={{this.image}}></div>
+                                <div class="event-details">
+                                    <p class="event-name">{{this.name}}</p>
+                                    <p class="event-city"><i class="fas fa-map-marker-alt"
+                                            aria-hidden="true"></i>&nbsp;{{this.city}}</p>
+                                    <p class="event-description"><b>Description:</b> {{this.shortdescription}}... <a
+                                            href="/event/{{this.id}}" style="font-size: 11px;">See more</a></p>
+                                </div>
+
+                            </div>
+                        </div>
+                        {{#if state}}
+                        <div class="post-reaction">
+                            <i class="fas fa-heart changeHeart" dataset-id={{this.id}} dataset-type="event"
+                                onclick="likeToggle(this)">
+                                <div class="likes-count">{{this.likes_count}}</div>
+                            </i>
+                        </div>
+                        {{else}}
+                        <div class="post-reaction">
+                            <i class="far fa-heart changeHeart" dataset-id={{this.id}} dataset-type="event"
+                                onclick="likeToggle(this)">
+                                <div class="likes-count">{{this.likes_count}}</div>
+                            </i>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div id="gumgumTask" class="hideDiv">
+                    {{#each task}}
+                    <div class="task-div">
+                        <div class="task-outer">
+
+                            <div class="author-details">
+                                <div class="author-photo"><img src={{this.author.image}} alt=""></div>
+                                {{this.author.name}}
+                            </div>
+                            <div class="task-content">
+                                <div class="task-image"><img src={{this.image}}></div>
+                                <div class="task-details">
+                                    <p class="task-name"><b>{{this.name}}</b></p>
+                                    <p class="task-city"><b><i class="fas fa-map-marker-alt"
+                                                aria-hidden="true"></i>&nbsp;{{this.city}}</b></p>
+                                    <p class="task-description"><b>Description:</b> {{this.shortdescription}}... <a
+                                            href="/task/{{this.id}}" style="font-size: 11px;">See more</a></p>
+                                </div>
+
+                            </div>
+                        </div>
+                        {{#if state}}
+                        <div class="post-reaction">
+                            <i class="fas fa-heart" class="changeHeart" dataset-id={{this.id}} dataset-type="task"
+                                onclick="likeToggle(this)">
+                                <div class="likes-count">{{this.likes_count}}</div>
+                            </i>
+                        </div>
+                        {{else}}
+                        <div class="post-reaction">
+                            <i class="far fa-heart" class="changeHeart" dataset-id={{this.id}} dataset-type="task"
+                                onclick="likeToggle(this)">
+                                <div class="likes-count">{{this.likes_count}}</div>
+                            </i>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Create Event or Task</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="selection">
+                                <ul class="select-list">
+                                    <li class="active" id="showEventsModal">Events</li>
+                                    <li id="showTasksModal">Tasks</li>
+                                </ul>
+                            </div>
+                            <!-- Modal body EVENT -->
+                            <div class="modal-body" id="gumgumEventModal">
+                                <form action="/event" method="POST" enctype="multipart/form-data">
+                                    <input type="text" class="form-control" name="eventname" id="eventname"
+                                        placeholder="Event Name">
+                                    <select type="text" id="selection" class="form-control formCity" id="city" name="city">
+                                        <option selected="true" disabled>City</option>
+                                        {{#each data}}
+                                        <option value={{this}}>{{this}}</option>
+                                        {{/each}}
+
+                                    </select>
+                                    <input type="text" class="form-control" name="description" id="description"
+                                        placeholder="Description">
+                                    <div class="custom-file mb-3">
+                                        <input type="file" class="custom-file-input" id="eventFile" name="imageFile">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                    <button class="btn btn-outline-dark">Create Event</button>
+                                </form>
+                            </div>
+                            <!-- Modal body TASK -->
+                            <div class="modal-body hideDiv" id="gumgumTaskModal">
+                                <form action="/task" method="POST" enctype="multipart/form-data">
+                                    <input type="text" class="form-control" name="taskname" id="taskname"
+                                        placeholder="Task Name">
+                                    <select type="text" id="selection" class="form-control formCity" id="city" name="city">
+                                        <option selected="true" disabled>City</option>
+                                        {{#each data}}
+                                        <option value={{this}}>{{this}}</option>
+                                        {{/each}}
+
+                                    </select>
+                                    <input type="text" class="form-control" name="description" id="description"
+                                        placeholder="Description">
+                                    <div class="custom-file mb-3">
+                                        <input type="file" class="custom-file-input" id="taskFile" name="imageFile">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                    <button class="btn btn-outline-dark">Create Task</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    {{!-- EDIT PHOTO MODAL --}}
+    <div class="modal" id="myModalPP">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload Profile Photo</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body EVENT -->
+                <div class="modal-body" id="gumgumEventModal">
+                    <form action="/user/changeprofilephoto/?_method=PUT" method="POST" enctype="multipart/form-data">
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="profilePhoto" name="imageFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                        <button class="btn btn-outline-dark">Upload Photo</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#navigation-bar").load("/navigation_bar/nav/nav.hbs");
+
+        $(".guest-search-field").focus(() => {
+            $(".guest-search-border").addClass("search-parent-focus");
+        }).blur(() => {
+            $(".guest-search-border").removeClass("search-parent-focus");
+        })
+
+        $("#eventFile").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        $("#taskFile").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+
+        $("#profilePhoto").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+
+        $('#showTasks').on('click', () => {
+            $('#gumgumTask').removeClass('hideDiv')
+            $('#gumgumEvent').addClass('hideDiv')
+            $('#showTasks').addClass('active');
+            $('#showEvents').removeClass('active');
+        })
+
+        $('#showEvents').on('click', () => {
+            $('#gumgumTask').addClass('hideDiv')
+            $('#gumgumEvent').removeClass('hideDiv')
+            $('#showTasks').removeClass('active');
+            $('#showEvents').addClass('active');
+        })
+        $('#showTasksModal').on('click', () => {
+            $('#gumgumTaskModal').removeClass('hideDiv')
+            $('#gumgumEventModal').addClass('hideDiv')
+            $('#showTasksModal').addClass('active');
+            $('#showEventsModal').removeClass('active');
+        })
+
+        $('#showEventsModal').on('click', () => {
+            $('#gumgumTaskModal').addClass('hideDiv')
+            $('#gumgumEventModal').removeClass('hideDiv')
+            $('#showTasksModal').removeClass('active');
+            $('#showEventsModal').addClass('active');
+        })
+    });
+    function likeToggle(x) {
+        let Params = {
+            method: "PUT"
+        }
+        if (x.classList.toggle("fas")) {
+            id = $(x).attr("dataset-id")
+            type = $(x).attr("dataset-type")
+            $(x).children(".likes-count").text(parseInt($(x).children(".likes-count").text()) + 1)
+
+            fetch('/updateLike/' + id + '/like/' + type, Params)
+        } else {
+            id = $(x).attr("dataset-id")
+            type = $(x).attr("dataset-type")
+            $(x).children(".likes-count").text(parseInt($(x).children(".likes-count").text()) - 1)
+
+            fetch('/updateLike/' + id + '/unlike/' + type, Params)
+        }
+        x.classList.toggle("far")
+    }
+</script>
+
+</html>
